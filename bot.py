@@ -2,7 +2,7 @@ from time import sleep
 from datetime import datetime
 import discord
 
-TOKEN = 'mfa.5ZwoIk7ZzXao9iFMhpEnyMqoKlNVjWCgag721ho1hkImcU8hcJZvaCi6Hwz0q_2wn0j_PoijoAd4oh2MFwKi'
+TOKEN = 'mfa.xmHCJ_O4d3BNQjGDpYogQL4eeAufKoe3kM-JTgNaKMJY--2gmZcCvGVF5rPnHY8UGqFB56uk9BWxabolNHQH'
 CHANNELID = 835802833878122577 #pingpong
 MESSAGE = '<@&835808706042134608>'
 
