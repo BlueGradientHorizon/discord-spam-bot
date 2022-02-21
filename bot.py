@@ -1,34 +1,46 @@
 from time import sleep
 from datetime import datetime
+from os import execv
+from sys import argv, executable
 import discord
 
-TOKEN = 'mfa.xmHCJ_O4d3BNQjGDpYogQL4eeAufKoe3kM-JTgNaKMJY--2gmZcCvGVF5rPnHY8UGqFB56uk9BWxabolNHQH'
-CHANNELID = 835802833878122577 #pingpong
-MESSAGE = '<@&835808706042134608>'
-
-USER = ''
-DISCR = ''
-USERID = ''
+TOKEN = 'your discord token here'
+CHANNELID = 0000000000000
+MESSAGE = 'your message here'
+DELAY = 3000 #in milliseconds
 
 client = discord.Client()
 
+def self_restart():
+    execv(executable, [executable] + argv)
+    
 @client.event
 async def on_ready():
     USER = str(client.user.display_name)
     USERID = str(client.user.id)
-
+    DISCR = str(client.user.discriminator)
+    
     print('User: ' + USER + '#' + DISCR)
     print('User ID: ' + USERID)
     print('Channel ID: ' + str(CHANNELID))
 
-    channel = client.get_channel(CHANNELID)
     counter = 0
     while True:
-        await channel.send(MESSAGE) # send '@PingPong Gang' message using role id
-        counter += 1
-        now = datetime.now()
-        print('#' + str(counter) + ' msg is sent at ' + now.strftime("%H:%M:%S, %d.%m.%y"))
-        sleep(1)
+        try:
+            await client.get_channel(CHANNELID).send(MESSAGE)
+            counter += 1
+            now = datetime.now()
+            print('#' + str(counter) + ' msg is sent at ' + now.strftime("%H:%M:%S, %d.%m.%y"))
+            sleep(DELAY/1000)
+        except:
+            print("Error occured while sending message")
+            sleep(1)
 
 if __name__ == "__main__":
-    client.run(TOKEN, bot = False)
+    while True:
+        try:
+            client.run(TOKEN, bot=False)
+        except:
+            print("Error running client, restarting")
+            sleep(1)
+            self_restart()
